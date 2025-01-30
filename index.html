@@ -1,31 +1,193 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>welcome star</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泡泡马特橱窗展示</title>
     <style>
-      body{margin: 0;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .showcase-title {
+            font-size: 2.5em;
+            color: #333;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .showcase-subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .showcase-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid #eee;
+        }
+
+        .item-info {
+            padding: 20px;
+        }
+
+        .item-title {
+            font-size: 1.2em;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .item-price {
+            color: #e74c3c;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        /* 轮播效果 */
+        .carousel {
+            position: relative;
+            margin: 40px 0;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .carousel {
+                height: 300px;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <div style="
-      background-color: #f1f1f1; 
-      text-align：center; 
-      padding：40px;">
-      <img src="https://s21.ax1x.com/2024/12/25/pAj27Uf.jpg" alt="h2ozht" width="80px" height="80px">
+</head>
+<body>
+    <div class="container">
+        <!-- 轮播区域 -->
+        <div class="carousel">
+            <div class="carousel-slide active">
+                <img src="https://source.unsplash.com/random/1200x500/?fashion" alt="展示商品1" class="item-image">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://source.unsplash.com/random/1200x500/?shoes" alt="展示商品2" class="item-image">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://source.unsplash.com/random/1200x500/?watch" alt="展示商品3" class="item-image">
+            </div>
+        </div>
+
+        <!-- 标题 -->
+        <header class="showcase-header">
+            <h1 class="showcase-title">泡泡马特展示窗</h1>
+            <p class="showcase-subtitle">02</p>
+        </header>
+
+        <!-- 商品网格 -->
+        <div class="showcase-grid">
+            <div class="showcase-item">
+                <img src="images/01.jpeg" alt="商品1" class="item-image">
+                <div class="item-info">
+                    <h3 class="item-title">03</h3>
+                    <p class="item-description">04</p>
+                    <div class="item-price">仅展示</div>
+                </div>
+            </div>
+
+            <div class="showcase-item">
+                <img src="images/02.jpeg" alt="商品2" class="item-image">
+                <div class="item-info">
+                    <h3 class="item-title"></h3>
+                    <p class="item-description"></p>
+                    <div class="item-price">仅展示</div>
+                </div>
+            </div>
+
+            <div class="showcase-item">
+                <img src="images/04.jpeg" alt="商品3" class="item-image">
+                <div class="item-info">
+                    <h3 class="item-title"></h3>
+                    <p class="item-description"></p>
+                    <div class="item-price">仅展示</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div style="maxwidth:700px; margin:30px auto; padding:15px; line-height: 1.7;">
-      <p>测试</p>
-      <p>测试2</p>
-      <p>测试3</p>
-    </div>
-    <div style="
-      background-color: #f1f1f1; 
-      text-align:center; 
-      padding: 40px;
-      font-size: 12px;">
-      <p>welcome</p>
-      </div>
-  </body>
-<html>
+
+    <script>
+        // 简单的轮播功能
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+    </script>
+</body>
+</html>
